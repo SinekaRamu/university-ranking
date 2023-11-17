@@ -1,14 +1,14 @@
 -- DML scripts
 
-insert into university (university_name) values ('Anna University'), ('Pondicherry University');
+--insert into university (university_name) values ('Anna University'), ('Pondicherry University');
 
-insert into colleges (college_name, university) values 
-('St. Joseph College of Engineering and Technology', 1), 
-('CK College of Engineering and Technology', 1),
-('KrishnaSamy College of Engineering and Technology',1),
-('St.Anne''s College of Engineering and Technology',1),
-('Excel College of Engineering and Technology',1),
-('Rajiv Gandhi College of Engineering and Technology', 2)
+insert into colleges (college_name) values 
+('St. Joseph College of Engineering and Technology'), 
+('CK College of Engineering and Technology'),
+('KrishnaSamy College of Engineering and Technology'),
+('St.Anne''s College of Engineering and Technology'),
+('Excel College of Engineering and Technology'),
+('Rajiv Gandhi College of Engineering and Technology')
 
 insert into courses (course_name) values 
 ('Computer Science Engineering'), ('Mechanical Engineering'),
