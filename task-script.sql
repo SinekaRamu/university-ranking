@@ -23,3 +23,7 @@ order by c.college_name, student_count desc;
 -- 7. get the failed students count each subject 
 -- 8. get over all students list with semester marks
 -- 9. get the student list who wasnt appear to the exams
+select s.stname
+from students s inner join exam_marks em 
+on s.stid = em.candidate
+where em.marks < 0; 
