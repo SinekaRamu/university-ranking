@@ -1,7 +1,11 @@
 -- task 2
 
 -- 1. get students count college wise
-select 	count(stid) from students where college = 6;
+select 	c.college-name, count(stid) 
+from students s
+right join colleges c 
+on s.college = c.college_id 
+group by course_name;
 
 -- 2. get students count in a college, course wise
 -- 3. get the university rank holder across all courses(1 student)
