@@ -21,6 +21,13 @@ order by c.college_name, student_count desc;
 -- 5. get the college topper across all courses
 -- 6. get the college toppers each course
 -- 7. get the failed students count each subject 
+select s.subject_name, count (st.stid) as failed_students_count
+from subjects s inner join course_subjects cs 
+on s.subject_id = cs.subject_id
+inner join exm_marks em on em.candidate = st.stid
+where em.marks < 35
+group by s.subject_name;
+
 -- 8. get over all students list with semester marks
 -- 9. get the student list who wasnt appear to the exams
 select s.stname
