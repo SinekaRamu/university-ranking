@@ -19,6 +19,16 @@ order by c.college_name, student_count desc;
 -- 3. get the university rank holder across all courses(1 student)
 -- 4. get the list of rank holders each course
 -- 5. get the college topper across all courses
+select candidate ,stname, college_name, cgp AS average_marks
+from(
+	select m.candidate ,s.stname, c.college_name, AVG(m.marks) AS cgp,
+rank() over(partition by c.college_id order by AVG(m.marks) DESC) as ranking
+from exam_marks m  
+join students s on s.stid  = m.candidate  
+join colleges c on c.college_id = s.college  
+group by m.candidate  ,s.stname , c.college_name,c.college_id) student_ranks
+where ranking = 1;
+
 -- 6. get the college toppers each course
 select candidate,stname,college_name ,course_name,cgp as avg_marks
 from(
