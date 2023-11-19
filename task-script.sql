@@ -17,6 +17,21 @@ group by c. college_name, cr.course_name having count (s.stid) > 0
 order by c.college_name, student_count desc;
 
 -- 3. get the university rank holder across all courses(1 student)
+select m.candidate , s.stname, AVG(m.marks) cgp,c2.course_name, c.college_name 
+from exam_marks m
+inner join students s on s.stid  = m.candidate  
+inner join courses c2 on c2.course_id = s.course  
+inner join colleges c on c.college_id = s.college 
+group by m.candidate ,s.stname ,c2.course_name,c.college_name
+having AVG(marks) = (
+    select MAX(avg_marks)
+    from (
+        select AVG(marks) avg_marks
+        from exam_marks 
+        group by candidate
+    ) as max_avg
+);
+
 -- 4. get the list of rank holders each course
 select  stid, stname, course_name, cgpa as average
 from (select s.stid, s.stname, c.course_name, avg(em.marks) as cgpa,
