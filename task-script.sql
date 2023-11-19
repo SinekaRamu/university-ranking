@@ -18,6 +18,16 @@ order by c.college_name, student_count desc;
 
 -- 3. get the university rank holder across all courses(1 student)
 -- 4. get the list of rank holders each course
+select  stid, stname, course_name, cgpa as average
+from (select s.stid, s.stname, c.course_name, avg(em.marks) as cgpa,
+rank() over (partition by c.course_id order by avg(em.marks) desc) rank
+from exam_marks em
+join students s on s.stid = em.candidate 
+inner join courses c on c.course_id = s.course
+group by s.stid, s.stname, c.course_name, c.course_id
+) ranked_students
+where rank = 1;
+
 -- 5. get the college topper across all courses
 select candidate ,stname, college_name, cgp AS average_marks
 from(
