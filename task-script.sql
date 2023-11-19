@@ -29,6 +29,9 @@ where em.marks < 35
 group by s.subject_name;
 
 -- 8. get over all students list with semester marks
+SELECT SUM(em.marks), em.candidate  
+FROM exam_marks em group by em.candidate;
+
 -- 9. get the student list who wasnt appear to the exams
 select s.stname
 from students s inner join exam_marks em 
