@@ -20,6 +20,17 @@ order by c.college_name, student_count desc;
 -- 4. get the list of rank holders each course
 -- 5. get the college topper across all courses
 -- 6. get the college toppers each course
+select candidate,stname,college_name ,course_name,cgp as avg_marks
+from(
+	select m.candidate  ,s.stname , c.college_name,c2.course_name, AVG(m.marks) AS cgp,
+rank() over(partition by c2.course_id,c.college_id  order by AVG(m.marks) DESC) as ranking
+from exam_marks m 
+join students s on s.stid  = m.candidate  
+join colleges c on c.college_id = s.college  
+join courses c2 on c2.course_id = s.course  
+group by m.candidate  ,s.stname , c.college_name,c2.course_id,c.college_id  ,c2.course_name) course_rank
+where ranking =1;
+
 -- 7. get the failed students count each subject 
 select s.subject_name, count (st.stid) as failed_students_count
 from subjects s inner join course_subjects cs 
