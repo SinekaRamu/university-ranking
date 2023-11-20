@@ -18,3 +18,10 @@ select * from arrear_students
 -- 4. delete a college and its respective things
 -- 5. alter all the tables add audit columns (createdAt,createBy,updatedAt,updatedBy)
 -- 6. remove the duplicate values in the mark table(insert values for your convenient)
+
+delete from exam_marks where candidate in (
+select candidate, subjects, count(*) cnt
+from exam_marks em 
+group by candidate , subjects having count(*) > 1 
+ ) 
+ returning  *
