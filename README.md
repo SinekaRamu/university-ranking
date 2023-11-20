@@ -13,7 +13,7 @@ university ranking database in postgres
 - feed necessary data to query the output
 
 ## Task - 2
-----------
+
 Querys
 ------
 - get students count college wise
@@ -26,3 +26,12 @@ Querys
 - get over all students list with semester marks
 - get the student list who wasnt appear to the exams
 All the informations needed for the semester April, 2023
+
+## task 3
+
+- update the mark to 40 those who were scored the marks between 35 to 39
+- get the history of marks that are changed
+- choose any select query from tast 2 and insert the values into a temp table reference
+- delete a college and its respective things
+- alter all the tables add audit columns (createdAt,createBy,updatedAt,updatedBy)
+- remove the duplicate values in the mark table(insert values for your convenient)
