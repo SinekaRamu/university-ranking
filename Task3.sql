@@ -5,6 +5,15 @@ set marks = 40
 where marks between 35 and 39;
 
 -- 2. get the history of marks that are changed
+select s.subject_name , count (em.candidate) no_of_failed_students
+into table arrear_students
+from subjects s
+	inner join exam_marks em on em.subjects = s.subject_id 
+where marks between 0 and 40
+group by s.subject_name 
+
+select * from arrear_students
+
 -- 3. choose any select query from tast 2 and insert the values into a temp table(https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select-into/)
 -- 4. delete a college and its respective things
 -- 5. alter all the tables add audit columns (createdAt,createBy,updatedAt,updatedBy)
