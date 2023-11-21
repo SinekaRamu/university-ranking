@@ -30,11 +30,26 @@ delete from colleges where college_id=6 returning *;
 select * from colleges c ;
 
 -- 5. alter all the tables add audit columns (createdAt,createBy,updatedAt,updatedBy)
+alter table exam_marks
+add column createdAt TIMESTAMP default current_timestamp,
+add column createBy VARCHAR default current_user,
+add column updatedAt timestamp default current_timestamp,
+add column updatedBy varchar default session_user
+	
 -- 6. remove the duplicate values in the mark table(insert values for your convenient)
 
-delete from exam_marks where candidate in (
+begin transaction;
+
+--To find the duplicate
 select candidate, subjects, count(*) cnt
 from exam_marks em 
-group by candidate , subjects having count(*) > 1 
- ) 
- returning  *
+group by candidate , subjects having count(*) > 1
+			
+-- delete the duplicate using delete statement
+delete from exam_marks m1
+	using exam_marks m2
+where m1.exam_id > m2.exam_id 
+and m1.subjects = m2.subjects 
+and m1.candidate = m2.candidate
+
+commit;
