@@ -26,6 +26,9 @@ group by s.subject_name
 select * from failed_student_count ;
 
 -- 4. delete a college and its respective things
+delete from colleges where college_id=6 returning *;
+select * from colleges c ;
+
 -- 5. alter all the tables add audit columns (createdAt,createBy,updatedAt,updatedBy)
 -- 6. remove the duplicate values in the mark table(insert values for your convenient)
 
