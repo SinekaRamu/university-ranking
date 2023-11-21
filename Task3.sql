@@ -6,14 +6,27 @@ where marks between 35 and 39
 	returning *;
 
 -- 2. get the history of marks that are changed
-select s.subject_name , count (em.candidate) no_of_failed_students
-into table arrear_students
-from subjects s
-	inner join exam_marks em on em.subjects = s.subject_id 
-where marks between 0 and 40
-group by s.subject_name 
-
-select * from arrear_students
+ CREATE TABLE history_table 
+  (
+   id SERIAL PRIMARY KEY NOT NULL,
+   mark_id SERIAL references exam_marks(exam_id),
+   audit_op   CHAR(1),
+   old_mark INTEGER,
+   new_mark INTEGER,
+   updatedAt TIMESTAMP(12) default current_timestamp,
+   updatedBy SERIAL references admin_users(id)
+   )
+  
+  select * from exam_marks em 
+  
+  update exam_marks
+  set marks = 36
+  where exam_id = 77
+  
+  insert into history_table(mark_id, audit_op, old_mark, new_mark, updatedby)
+  values (77, 'U', 6, 36, 1)
+  
+  select * from history_table ht ;
 
 -- 3. choose any select query from tast 2 and insert the values into a temp table(https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select-into/)
 select s.subject_name , count (em.candidate) no_of_failed_students
